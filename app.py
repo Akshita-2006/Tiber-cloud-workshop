@@ -15,6 +15,7 @@ from sklearn.metrics import accuracy_score, classification_report#for performanc
 import matplotlib.pyplot as plt#data visualisation
 #from sklearn.preprocessing import LabelEncoder#to encode categorical values into numeric form
 from sklearn.ensemble import RandomForestClassifier#classification tasks
+import streamlit as st
 
 data=pd.read_csv('loan_approval_dataset.csv')#loading the file
 
@@ -22,7 +23,7 @@ type(data)#checking type of dataset
 
 data.head()# displaying first 5 rows
 
-data.shape#rows and column number ki kitne hai
+#data.shape#rows and column number ki kitne hai
 
 data.describe()
 
@@ -30,7 +31,8 @@ data.isnull().sum()#kitne aise columns hai jinmai koi missing value hai
 
 sns.countplot(x=' education',hue=' loan_status',data=data)
 plt.title('Count of Loan Status by Education Level')#visualising that how much graduated/non graduated are approved or rejected for loan
-plt.show()
+#plt.show()
+st.pyplot(plt)
 
 #approved vs rejected loan status
 plt.figure(figsize=(8, 6))
@@ -38,7 +40,8 @@ sns.countplot(data=data, x=' loan_status', palette='viridis')#colour scheme
 plt.title("Distribution of Loan Status")
 plt.xlabel("Loan Status (Approved / Rejected)")
 plt.ylabel("Count")
-plt.show()
+#plt.show()
+st.pyplot(plt)
 
 plt.figure(figsize=(8, 6))
 sns.scatterplot(data=data, x=' income_annum', y=' loan_amount', hue=' loan_status', palette='coolwarm')
@@ -46,7 +49,8 @@ plt.title("Income vs. Loan Amount")
 plt.xlabel("Annual Income")
 plt.ylabel("Loan Amount")
 plt.legend(title="Loan Status")#basically kind of scale
-plt.show()
+#plt.show()
+st.pyplot(plt)
 
 # now we will convert into categorical forms like yes/no to 0/1 for machine understanding
 data.replace({" loan_status":{' Rejected':0,' Approved':1}},inplace=True)
@@ -83,4 +87,5 @@ feature_importances.nlargest(10).sort_values().plot(kind='barh', color='skyblue'
 plt.title("Top 10 Feature Importances")
 plt.xlabel("Importance Score")
 plt.ylabel("Features")
-plt.show()
+#plt.show()
+st.pyplot(plt)
